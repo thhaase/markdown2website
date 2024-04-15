@@ -17,13 +17,13 @@ The project has a simple file structure:
 ├── index.md
 ├── post1.md
 ├── post2.md
-└── .source
+├── .source
     ├── index.html
     ├── markdownParser.js
     ├── post.html
     ├── second.css
     └── standard.css
-├── .media
+└── .media
     └── jupiter.jpg
 
 ```
