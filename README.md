@@ -1,5 +1,3 @@
-# Lightweight Markdown to Webpage Converter
-
 ## Overview
 
 This project is a lightweight and simple tool that converts markdown files into a minimalist webpage. It's designed to be easy to use: just place your markdown files in a single folder, and they'll be automatically converted into a clean, readable webpage.
@@ -17,16 +15,17 @@ The project has a simple file structure:
 ```
 .
 ├── index.md
-├── .media
-│   └── jupiter.jpg
 ├── post1.md
 ├── post2.md
-└── .source
+├── .source
     ├── index.html
     ├── markdownParser.js
     ├── post.html
     ├── second.css
     └── standard.css
+└── .media
+    └── jupiter.jpg
+
 ```
 
 - `index.md` will be the Homepage, the other markdownfiles (such as post1.md, post2.md) can be linked in the index.md.
