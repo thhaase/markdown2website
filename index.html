@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tab-Title in Browser</title>
-    <link rel="stylesheet" href=".source/standard.css" id="themeStyle">
+    <link rel="stylesheet" href="source/standard.css" id="themeStyle">
 </head>
 <body>
     <div class="main-container"></div>
@@ -30,7 +30,7 @@
     </div>
     
     <!-- Include the Markdownparser -->
-    <script src=".source/markdownParser.js"></script>
+    <script src="source/markdownParser.js"></script>
 
 
     <script>
@@ -41,7 +41,7 @@
                     e.preventDefault(); // Prevent the default link behavior
                     const mdFileName = e.target.getAttribute('href');
                     const postName = mdFileName.replace('.md', ''); // Remove the .md extension
-                    window.location.href = `.source/post.html?name=${postName}`; // Redirect to post.html with the proper query parameter
+                    window.location.href = `source/post.html?name=${postName}`; // Redirect to post.html with the proper query parameter
                 }
             });
         });
@@ -51,12 +51,12 @@
     <script>
     function changeTheme() {
         var themeStyle = document.getElementById('themeStyle');
-            if (themeStyle.getAttribute('href') === '.source/standard.css') {
-            themeStyle.setAttribute('href', '.source/second.css');
-            sessionStorage.setItem('theme', '.source/second.css'); // Store the selection in sessionStorage
+            if (themeStyle.getAttribute('href') === 'source/standard.css') {
+            themeStyle.setAttribute('href', 'source/second.css');
+            sessionStorage.setItem('theme', 'source/second.css'); // Store the selection in sessionStorage
             } else {
-        themeStyle.setAttribute('href', '.source/standard.css');
-        sessionStorage.setItem('theme', '.source/standard.css'); // Store the selection in sessionStorage
+        themeStyle.setAttribute('href', 'source/standard.css');
+        sessionStorage.setItem('theme', 'source/standard.css'); // Store the selection in sessionStorage
         }
   }
 
