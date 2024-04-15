@@ -15,7 +15,7 @@ function parseMarkdown(markdownText) {
         // Images, links, line breaks
         .replace(/!\[(.*?)\]\((.*?)(?:\|(.*?))?\)/gim, (match, alt, src, scale) => {
             scale = scale || 100; // default scale is 100 if not provided
-            return `<img alt='${alt}' src='../.media/${src}' style='width: ${scale}%;' />`;
+            return `<img alt='${alt}' src='../media/${src}' style='width: ${scale}%;' />`;
         })
         .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
         .replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>')
