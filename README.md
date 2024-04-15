@@ -1,5 +1,3 @@
-# Lightweight Markdown to Webpage Converter
-
 ## Overview
 
 This project is a lightweight and simple tool that converts markdown files into a minimalist webpage. It's designed to be easy to use: just place your markdown files in a single folder, and they'll be automatically converted into a clean, readable webpage.
