@@ -209,3 +209,48 @@ code {
 .string { color: #df5000; }
 
 
+/* print without header */
+@media print {
+    body, html {
+        width: 100%;
+    }
+
+    .header {
+        display: none; /* Hides parts of the page that shouldn't be printed */
+    }
+
+    nav {
+        display: none;
+    }
+
+    .content {
+        width: 100%;
+        /*font-size: 12pt; larger text when printing */
+    }
+
+}
+
+.nav-button {
+    color: black;
+    background-color: transparent;
+    border: 1px solid transparent;
+    margin-left: 20px;
+    font-size: 1em;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Match the font style */
+    text-align: center;
+    line-height: normal;
+    display: inline-block;
+    border-color: black
+}
+
+
+.nav-button:hover {
+    color: black;
+    text-decoration: none;
+    background-color: lightgrey;
+}

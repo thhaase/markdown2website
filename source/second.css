@@ -193,3 +193,50 @@ ol ul {
 ol ul ul {
     list-style-type: circle; /* hollow circles for nested unordered lists */
 }
+
+
+/* print without header */
+@media print {
+    body, html {
+        width: 100%;
+    }
+
+    .header {
+        display: none; /* Hides parts of the page that shouldn't be printed */
+    }
+
+    nav {
+        display: none;
+    }
+
+    .content {
+        width: 100%;
+        /*font-size: 12pt; larger text when printing */
+    }
+
+}
+
+.nav-button {
+    color: black;
+    background-color: transparent;
+    border: 1px solid transparent;
+    margin-left: 20px;
+    font-size: 1em;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+    text-align: center;
+    line-height: normal;
+    display: inline-block;
+    border-color: black;
+    font-family: 'CMUN-Roman', 'CMUN-Bold', 'CMUN-Italic', 'CMUN-BoldItalic', 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
+}
+
+
+.nav-button:hover {
+    color: black;
+    text-decoration: none;
+    background-color: lightgrey;
+}
