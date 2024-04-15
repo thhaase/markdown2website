@@ -31,8 +31,10 @@
             const savedTheme = sessionStorage.getItem('theme');
             const themeStyle = document.getElementById('themeStyle');
             if (savedTheme) {
-                themeStyle.setAttribute('href', savedTheme);
-            }
+            // Prepend "docs/" to the saved theme if it doesn't already start with it
+            const themePath = savedTheme.startsWith('docs/') ? savedTheme : `docs/${savedTheme}`;
+            themeStyle.setAttribute('href', themePath);
+        }   
 
             // Load and render Markdown content
             fetch('startpage.md')
@@ -55,10 +57,13 @@
             // Theme switcher functionality
             document.getElementById('themeSwitcher').addEventListener('click', e => {
                 e.preventDefault();
-                const newTheme = themeStyle.getAttribute('href') === 'docs/standard.css' ? 'docs/second.css' : 'docs/standard.css';
-                themeStyle.setAttribute('href', newTheme);
-                sessionStorage.setItem('theme', newTheme);
+                const currentTheme = themeStyle.getAttribute('href');
+                const themeFilename = currentTheme.split('/').pop(); // Get only the filename.css
+                const newTheme = themeFilename === 'standard.css' ? 'second.css' : 'standard.css'; // Change the theme filename
+                themeStyle.setAttribute('href', 'docs/' + newTheme); // Add the 'docs/' prefix back when setting the attribute
+                sessionStorage.setItem('theme', newTheme); // Save the new theme path with 'docs/' prefix
             });
+
 
             // Redirect to specific markdown pages
             document.body.addEventListener('click', e => {
