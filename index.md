@@ -26,7 +26,6 @@ Liste:
   - Big Data
 
 
-
 ---
 
 asdasd
@@ -40,7 +39,6 @@ Here's a task list:
 - [ ] Incomplete task
 
 
----
 
 | Column 1 | Column 2 |
 |----------|----------|
