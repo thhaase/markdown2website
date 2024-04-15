@@ -11,7 +11,7 @@
         <div class="header">
             <h1><strong>Title</strong></h1>
             <nav>
-                <a href="index.html">Home</a>
+                <a href="../index.html">Home</a>
                 <a href="https://github.com/thhaase">GitHub</a>
                 <a href="#" id="themeSwitcher">Switch Theme</a>
             </nav>
@@ -39,11 +39,22 @@
     </div>
 
 
-
     <!-- Include the Markdownparser -->
     <script src="markdownParser.js"></script>
 
-
+  <script>
+    // links to other markdown documents are easy now 
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.body.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.href.endsWith('.md')) {
+                e.preventDefault(); // Prevent the default link behavior
+                const mdFileName = e.target.getAttribute('href');
+                const postName = mdFileName.replace('.md', ''); // Remove the .md extension
+                window.location.href = `post.html?name=${postName}`; // Redirect to post.html with the proper query parameter
+            }
+        });
+    });
+  </script>
 
     <!-- themeswitcher ID switched themes; use of local storage to keep the theme when opening links-->
     <script>

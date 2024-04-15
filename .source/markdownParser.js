@@ -44,17 +44,7 @@ function parseMarkdown(markdownText) {
     return htmlText.trim();
 }
 
-// links to other markdown documents are easy now 
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.body.addEventListener('click', function(e) {
-        if (e.target.tagName === 'A' && e.target.href.endsWith('.md')) {
-            e.preventDefault(); // Prevent the default link behavior
-            const mdFileName = e.target.getAttribute('href');
-            const postName = mdFileName.replace('.md', ''); // Remove the .md extension
-            window.location.href = `post.html?name=${postName}`; // Redirect to post.html with the proper query parameter
-        }
-    });
-});
+
 
 
 

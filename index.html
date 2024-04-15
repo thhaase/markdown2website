@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tab-Title in Browser</title>
-    <link rel="stylesheet" href="standard.css" id="themeStyle">
+    <link rel="stylesheet" href=".source/standard.css" id="themeStyle">
 </head>
 <body>
     <div class="main-container"></div>
@@ -20,7 +20,7 @@
         <div id="content"></div>
         <!-- display index.md -->
         <script>
-            fetch('../index.md')
+            fetch('index.md')
                 .then(response => response.text())
                 .then(text => {
                     document.getElementById('content').innerHTML = parseMarkdown(text);
@@ -30,19 +30,33 @@
     </div>
     
     <!-- Include the Markdownparser -->
-    <script src="markdownParser.js"></script>
+    <script src=".source/markdownParser.js"></script>
 
+
+    <script>
+        // links to other markdown documents are easy now 
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.body.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A' && e.target.href.endsWith('.md')) {
+                    e.preventDefault(); // Prevent the default link behavior
+                    const mdFileName = e.target.getAttribute('href');
+                    const postName = mdFileName.replace('.md', ''); // Remove the .md extension
+                    window.location.href = `.source/post.html?name=${postName}`; // Redirect to post.html with the proper query parameter
+                }
+            });
+        });
+    </script>
 
     <!-- themeswitcher ID switched themes; use of local storage to keep the theme when opening links -->
     <script>
     function changeTheme() {
         var themeStyle = document.getElementById('themeStyle');
-            if (themeStyle.getAttribute('href') === 'standard.css') {
-            themeStyle.setAttribute('href', 'second.css');
-            sessionStorage.setItem('theme', 'second.css'); // Store the selection in sessionStorage
+            if (themeStyle.getAttribute('href') === '.source/standard.css') {
+            themeStyle.setAttribute('href', '.source/second.css');
+            sessionStorage.setItem('theme', '.source/second.css'); // Store the selection in sessionStorage
             } else {
-        themeStyle.setAttribute('href', 'standard.css');
-        sessionStorage.setItem('theme', 'standard.css'); // Store the selection in sessionStorage
+        themeStyle.setAttribute('href', '.source/standard.css');
+        sessionStorage.setItem('theme', '.source/standard.css'); // Store the selection in sessionStorage
         }
   }
 
