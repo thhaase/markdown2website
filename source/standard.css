@@ -73,7 +73,7 @@ body {
     line-height: 1.6;
 }
 
-#content, #postContent {
+#content, #pageContent {
     max-width: 860px;
     margin: 0 auto;
     padding: 30px;
@@ -81,13 +81,13 @@ body {
 }
 
 @media only screen and (min-width: 1400px) {
-    #content, #postContent {
+    #content, #pageContent {
         max-width: 1024px;
     }
 }
 
 @media only screen and (min-width: 1800px) {
-    #content, #postContent {
+    #content, #pageContent {
         max-width: 1200px;
     }
 }

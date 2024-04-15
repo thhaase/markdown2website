@@ -19,23 +19,23 @@
             </nav>
         </div>
 
-        <div id="postContent"></div>
+        <div id="pageContent"></div>
 
 
-        <!-- display posts -->
+        <!-- display pages -->
         <script>
             const queryParams = new URLSearchParams(window.location.search);
-            const postName = queryParams.get('name');
+            const pageName = queryParams.get('name');
 
-            if (postName) {
-                fetch(`../${postName}.md`)
+            if (pageName) {
+                fetch(`../${pageName}.md`)
                     .then(response => response.text())
                     .then(text => {
-                        document.getElementById('postContent').innerHTML = parseMarkdown(text);
+                        document.getElementById('pageContent').innerHTML = parseMarkdown(text);
                     })
-                    .catch(error => console.error('Error loading post:', error));
+                    .catch(error => console.error('Error loading page:', error));
             } else {
-                document.getElementById('postContent').innerHTML = '<p>Post not found.</p>';
+                document.getElementById('pageContent').innerHTML = '<p>Page not found.</p>';
             }
         </script>
     </div>
@@ -55,8 +55,8 @@
             if (e.target.tagName === 'A' && e.target.href.endsWith('.md')) {
                 e.preventDefault(); // Prevent the default link behavior
                 const mdFileName = e.target.getAttribute('href');
-                const postName = mdFileName.replace('.md', ''); // Remove the .md extension
-                window.location.href = `post.html?name=${postName}`; // Redirect to post.html with the proper query parameter
+                const pageName = mdFileName.replace('.md', ''); // Remove the .md extension
+                window.location.href = `page.html?name=${pageName}`; // Redirect to page.html with the proper query parameter
             }
         });
     });

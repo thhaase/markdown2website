@@ -95,7 +95,7 @@ body {
 
 
 /* Styles for the content */
-#content, #postContent {
+#content, #pageContent {
     border-left: 2px solid #000;
     border-right: 2px solid #000;
     border-bottom: 2px solid #000;
@@ -106,13 +106,13 @@ body {
 }
 
 @media only screen and (min-width: 1400px) {
-    #content, #postContent {
+    #content, #pageContent {
         max-width: 1024px;
     }
 }
 
 @media only screen and (min-width: 1800px) {
-    #content, #postContent {
+    #content, #pageContent {
         max-width: 1200px;
     }
 }
