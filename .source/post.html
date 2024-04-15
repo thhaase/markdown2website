@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD-File</title>
+    <link rel="stylesheet" href="standard.css" id="themeStyle">
+</head>
+<body>
+    <div class="main-container"></div>
+        <div class="header">
+            <h1><strong>Title</strong></h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="https://github.com/thhaase">GitHub</a>
+                <a href="#" id="themeSwitcher">Switch Theme</a>
+            </nav>
+        </div>
+
+        <div id="postContent"></div>
+
+
+        <!-- display posts -->
+        <script>
+            const queryParams = new URLSearchParams(window.location.search);
+            const postName = queryParams.get('name');
+
+            if (postName) {
+                fetch(`../${postName}.md`)
+                    .then(response => response.text())
+                    .then(text => {
+                        document.getElementById('postContent').innerHTML = parseMarkdown(text);
+                    })
+                    .catch(error => console.error('Error loading post:', error));
+            } else {
+                document.getElementById('postContent').innerHTML = '<p>Post not found.</p>';
+            }
+        </script>
+    </div>
+
+
+
+    <!-- Include the Markdownparser -->
+    <script src="markdownParser.js"></script>
+
+
+
+    <!-- themeswitcher ID switched themes; use of local storage to keep the theme when opening links-->
+    <script>
+        function changeTheme() {
+    var themeStyle = document.getElementById('themeStyle');
+    if (themeStyle.getAttribute('href') === 'standard.css') {
+      themeStyle.setAttribute('href', 'second.css');
+      sessionStorage.setItem('theme', 'second.css'); // Store the selection in sessionStorage
+    } else {
+      themeStyle.setAttribute('href', 'standard.css');
+      sessionStorage.setItem('theme', 'standard.css'); // Store the selection in sessionStorage
+    }
+  }
+
+  // Event listener for the theme switcher
+  document.getElementById('themeSwitcher').addEventListener('click', function(e) {
+    e.preventDefault();
+    changeTheme();
+  });
+
+  // Apply the stored theme on page load
+  window.onload = function() {
+    var savedTheme = sessionStorage.getItem('theme');
+    if (savedTheme) {
+      document.getElementById('themeStyle').setAttribute('href', savedTheme);
+    }
+  };
+      </script>
+      
+
+
+</body>
+</html>
