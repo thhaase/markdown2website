@@ -17,8 +17,6 @@ The project has a simple file structure:
 ```
 .
 ├── index.md
-├── .media
-│   └── jupiter.jpg
 ├── post1.md
 ├── post2.md
 └── .source
@@ -27,6 +25,9 @@ The project has a simple file structure:
     ├── post.html
     ├── second.css
     └── standard.css
+├── .media
+    └── jupiter.jpg
+
 ```
 
 - `index.md` will be the Homepage, the other markdownfiles (such as post1.md, post2.md) can be linked in the index.md.
