@@ -46,9 +46,6 @@ function parseMarkdown(markdownText) {
 
 
 
-
-
-
 // 🙏 chatgpt for the function
 const tableRegex = /\|(.+)\n\|([ -:|]+)\n((\|.*\n?)+)/gim;
 function parseTable(markdownTable) {
