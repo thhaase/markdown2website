@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tab-Title in Browser</title>
-    <!-- Adjust paths based on the HTML file location inside 'docs' -->
-    <link rel="stylesheet" href="docs/standard.css" id="themeStyle">
-    <link rel="stylesheet" href="docs/katex/katex.min.css">
+    <!-- Adjust paths based on the HTML file location inside 'source' -->
+    <link rel="stylesheet" href="source/standard.css" id="themeStyle">
+    <link rel="stylesheet" href="source/katex/katex.min.css">
 </head>
 <body>
     <div class="header">
@@ -21,9 +21,9 @@
 
     <div id="content"></div>
 
-    <script src="docs/katex/katex.min.js"></script>
-    <script src="docs/katex/contrib/auto-render.min.js"></script>
-    <script src="docs/markdownParser.js"></script>
+    <script src="source/katex/katex.min.js"></script>
+    <script src="source/katex/contrib/auto-render.min.js"></script>
+    <script src="source/markdownParser.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -31,8 +31,8 @@
             const savedTheme = sessionStorage.getItem('theme');
             const themeStyle = document.getElementById('themeStyle');
             if (savedTheme) {
-            // Prepend "docs/" to the saved theme if it doesn't already start with it
-            const themePath = savedTheme.startsWith('docs/') ? savedTheme : `docs/${savedTheme}`;
+            // Prepend "source/" to the saved theme if it doesn't already start with it
+            const themePath = savedTheme.startsWith('source/') ? savedTheme : `source/${savedTheme}`;
             themeStyle.setAttribute('href', themePath);
         }   
 
@@ -60,8 +60,8 @@
                 const currentTheme = themeStyle.getAttribute('href');
                 const themeFilename = currentTheme.split('/').pop(); // Get only the filename.css
                 const newTheme = themeFilename === 'standard.css' ? 'second.css' : 'standard.css'; // Change the theme filename
-                themeStyle.setAttribute('href', 'docs/' + newTheme); // Add the 'docs/' prefix back when setting the attribute
-                sessionStorage.setItem('theme', newTheme); // Save the new theme path with 'docs/' prefix
+                themeStyle.setAttribute('href', 'source/' + newTheme); // Add the 'source/' prefix back when setting the attribute
+                sessionStorage.setItem('theme', newTheme); // Save the new theme path with 'source/' prefix
             });
 
 
@@ -71,7 +71,7 @@
                     e.preventDefault();
                     const mdFileName = e.target.getAttribute('href');
                     const pageName = mdFileName.replace('.md', '');
-                    window.location.href = `docs/page.html?name=${pageName}`;
+                    window.location.href = `source/page.html?name=${pageName}`;
                 }
             });
         });
