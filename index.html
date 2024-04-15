@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tab-Title in Browser</title>
     <link rel="stylesheet" href="source/standard.css" id="themeStyle">
+    <link rel="stylesheet" href="source/katex/katex.min.css">
+    
+
 </head>
 <body>
     <div class="main-container"></div>
@@ -31,6 +34,9 @@
     
     <!-- Include the Markdownparser -->
     <script src="source/markdownParser.js"></script>
+    <!-- Scripts for katex-->
+    <script src="source/katex/katex.min.js"></script>
+    <script src="source/katex/contrib/auto-render.min.js"></script>
 
 
     <script>
@@ -49,32 +55,70 @@
 
     <!-- themeswitcher ID switched themes; use of local storage to keep the theme when opening links -->
     <script>
-    function changeTheme() {
-        var themeStyle = document.getElementById('themeStyle');
-            if (themeStyle.getAttribute('href') === 'source/standard.css') {
-            themeStyle.setAttribute('href', 'source/second.css');
-            sessionStorage.setItem('theme', 'source/second.css'); // Store the selection in sessionStorage
-            } else {
-        themeStyle.setAttribute('href', 'source/standard.css');
-        sessionStorage.setItem('theme', 'source/standard.css'); // Store the selection in sessionStorage
+        function changeTheme() {
+            var themeStyle = document.getElementById('themeStyle');
+                if (themeStyle.getAttribute('href') === 'source/standard.css') {
+                themeStyle.setAttribute('href', 'source/second.css');
+                sessionStorage.setItem('theme', 'source/second.css'); // Store the selection in sessionStorage
+                } else {
+            themeStyle.setAttribute('href', 'source/standard.css');
+            sessionStorage.setItem('theme', 'source/standard.css'); // Store the selection in sessionStorage
+            }
         }
-  }
 
-  // Event listener for the theme switcher
-  document.getElementById('themeSwitcher').addEventListener('click', function(e) {
-    e.preventDefault();
-    changeTheme();
-  });
+        // Event listener for the theme switcher
+        document.getElementById('themeSwitcher').addEventListener('click', function(e) {
+            e.preventDefault();
+            changeTheme();
+        });
 
-  // Apply the stored theme on page load
-  window.onload = function() {
-    var savedTheme = sessionStorage.getItem('theme');
-    if (savedTheme) {
-      document.getElementById('themeStyle').setAttribute('href', savedTheme);
-    }
-  };
-      </script>
+        // Apply the stored theme on page load
+        window.onload = function() {
+            var savedTheme = sessionStorage.getItem('theme');
+            if (savedTheme) {
+            document.getElementById('themeStyle').setAttribute('href', savedTheme);
+            }
+        };
+    </script>
       
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // custom delimiters
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ],
+            // ignored tags
+            ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+        });
+    });
+    </script>
+
+    <!-- render Katex after markdown is rendered-->
+    <script>
+        // Fetch and render markdown
+        fetch('index.md')
+            .then(response => response.text())
+            .then(text => {
+                const contentElement = document.getElementById('content');
+                contentElement.innerHTML = parseMarkdown(text);
+
+                // Call KaTeX render method to process any LaTeX in the content
+                renderMathInElement(contentElement, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "\\[", right: "\\]", display: true},
+                        {left: "$", right: "$", display: false},
+                        {left: "\\(", right: "\\)", display: false}
+                    ],
+                    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+                });
+            })
+            .catch(error => console.error('Error loading markdown:', error));
+    </script>
 
 </body>
 </html>
