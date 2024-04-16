@@ -1,6 +1,13 @@
 # Features
 
 Besides casual things like Headings, **bold text** and *italic text* there are many more functions supported.
+this is a new line 
+another new line
+
+Neue Zeile
+
+
+großer absatz
 
 - Link to Websites: [Gitub](https://github.com/thhaase)
 - Link to other Markdownfiles: [hahalala](how_to_use.md)
@@ -49,9 +56,33 @@ $$
 
 
 
-## Warnings
+## Tricky formatting
 
-### formatted links
+### New Lines
+This whole Text is all in
+one big line despite it being in 
+multiple lines in the .md file.
+
+A new line on the website is made via a free line in the markdown
+
+
+New Paragraph with two free lines 
+
+
+```markdown
+This whole Text is all in
+one big line despite it being in 
+multiple lines in the .md file.
+
+A new line on the website is made via a free line in the markdown
+
+
+New Paragraph with two free lines 
+```
+
+
+
+### Formatted Links
 ```markdown
 // this does not work: 
 [**Text**](link.md)
@@ -59,3 +90,4 @@ $$
 // this works:
 **[Text](link.md)**
 ```
+

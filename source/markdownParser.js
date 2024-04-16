@@ -44,7 +44,9 @@ function parseMarkdown(markdownText) {
         .replace(tableRegex, match => parseTable(match))
 
         // Linebreaks
+        .replace(/\n\s*\n\s*\n/g, '<br><br>')
         .replace(/\n\s*\n/g, '<br>')
+
 
         // Horizontal lines
         .replace(/---+/g, '<hr style="border: 0; height: 1.2px; background: #000;" />')

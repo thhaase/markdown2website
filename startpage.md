@@ -8,13 +8,16 @@ It's build with a minimalist mindset wich makes it highly flexible and easy to u
  - 3. create a startpage.md wich will act as a homepage. link all your other markdownfiles there
   - 4. for further customization (titles,...) edit the index.html file 
 
-✨Voliá✨ that's it!
-
+✨ voilà ✨ ...that's it!
 To create a public Website upload your folder to Github and activate GithubPages with `main/root`.
+
+## Why is it better then everything else
+- selfcontaining 
+  - includes all necessary components—data, logic, and resources—to function independently, supporting its primary functionalities without reliance on external services or libraries.)
 
 ## Linklist
 - **[Features](features.md)**
-- [detailed "How to use"](how_to_use.md)
+- **[detailed "How to use"](how_to_use.md)**
 
 ---
 

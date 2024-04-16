@@ -171,9 +171,6 @@ h5, h6 {
     color: #777;
 }
 
-p, blockquote, ul, ol, dl, table {
-    margin: 0.8em 0;
-}
 
 a {
     color: #4183C4; /* This sets the link color to the specified blue */
@@ -228,14 +225,14 @@ th {
 
 /*Bulletpoints*/
 
-/* Style for the main bullet points */
+/* main bulletpoints */
 ul {
     list-style-type: disc; /* solid circles */
-  }
+}
   
-/* Style for the nested bullet points */
+/* nested bulletpoints */
 ul ul {
-list-style-type: circle; /* hollow circles */
+    list-style-type: circle; /* hollow circles */
 }
     
 
@@ -258,7 +255,7 @@ pre {
     color: #fff; /* Text color similar to body for better consistency */
     line-height: 1.6; /* Matches the line height of your body text */
     margin: 0.8em 0; /* Spacing above and below the code blocks */
-    font-size: large;
+    font-size: medium;
     box-shadow: 0 0 2px #333;
 }
 
