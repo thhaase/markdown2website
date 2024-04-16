@@ -24,8 +24,10 @@ function parseMarkdown(markdownText) {
         .replace(/^>(.*)$/gm, '<blockquote>$1</blockquote>')
 
         // Bold and italic
-        .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-        .replace(/\*(.*)\*/gim, '<em>$1</em>')
+        .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+        .replace(/\_\_(.*?)\_\_/gim, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+        .replace(/\_(.*?)\_/gim, '<em>$1</em>')
 
         // Images, links
         .replace(/!\[(.*?)\]\((.*?)(?:\|(.*?))?\)/gim, (match, alt, src, scale) => {

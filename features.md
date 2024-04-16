@@ -91,3 +91,5 @@ New Paragraph with two free lines
 **[Text](link.md)**
 ```
 
+###  Inline Code 
+Inline Code is not yet supported, I recommend using the other formatting options to make the Inline-Code stand out.
