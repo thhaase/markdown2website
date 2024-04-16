@@ -20,12 +20,11 @@
 
     <div id="pageContent"></div>
 
-    <!-- Include the Markdown parser -->
-    <script src="markdownParser.js"></script>
     
     <!-- Katex scripts -->
     <script src="katex/katex.min.js"></script>
     <script src="katex/contrib/auto-render.min.js"></script>
+    <script src="markdownParser.js"></script>
 
     <script>
       // Theme switcher logic
@@ -72,16 +71,22 @@
           document.getElementById('pageContent').innerHTML = '<p>Page not found.</p>';
         }
 
-        document.body.addEventListener('click', function(e) {
-          if (e.target.tagName === 'A' && e.target.href.endsWith('.md')) {
-            e.preventDefault();
-            const mdFileName = e.target.getAttribute('href');
-            const newPageName = mdFileName.replace('.md', '');
-            window.location.href = `page.html?name=${newPageName}`;
-          }
+        // linking markdown files made easy
+        document.body.addEventListener('click', e => {
+            if (e.target.tagName === 'A' && e.target.href.match(/\.md$/)) {
+                e.preventDefault(); // Prevent default link behavior
+                const mdFilePath = e.target.getAttribute('href');
+                const mdFileName = mdFilePath.split('/').pop(); // Extracts the file name from the path
+                const pageName = mdFileName.replace('.md', ''); // Removes the .md extension
+                window.location.href = `page.html?name=${pageName}`; // Redirects to the corresponding page
+            }
         });
       });
     </script>
+
+    <!-- Include the Markdown parser -->
+
+
 
 </body>
 </html>

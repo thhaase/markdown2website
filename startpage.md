@@ -12,51 +12,16 @@ It's build with a minimalist mindset wich makes it highly flexible and easy to u
 
 To create a public Website upload your folder to Github and activate GithubPages with `main/root`.
 
-
-
-# Features
-
-Besides casual things like Headings, **bold text** and *italic text* there are many more functions supported.
-
-- Link to Websites: [Gitub](https://github.com/thhaase)
-- Link to other Markdownfiles: [Markdownfile](another_file.md)
-
-![Image](jupiter.jpg|25)
-
-- Intuitive Linebreaks
-- Codeblocks and `inline code`
-- Horizontal lines 
-- Tables
-
-
-```markdown
-# markdown
-![Image](jupiter.jpg|25)
-$a^2 + b^2 = c^2$
-```
-
-
-| Header1 | Header2 |
-|---------|---------|
-| Cell1   | Cell2   |
-| Cell3   | Cell4   |
-
-
-> Blockquotes
-
-- Tasklist  
-
-- [x] Checked item
-- [ ] Unchecked item
+## Linklist
+- **[Features](features.md)**
+- [detailed "How to use"](how_to_use.md)
 
 ---
 
-![Click to expand]{This text is expandable and hidden by default.}
 
+## Inspiration and Background
 
-- Math $a^2 + b^2 = c^2$ and \( x^2 \)
+The Inpiration for this project were the many lightweight RegEx-based parser from the Github User [Casualwriter](https://github.com/casualwriter). The thought of a really simple, selfcontained and minimalistic *Markdown $\Rightarrow$ Website* tool was fascinating. 
 
-
-$$
-i\hbar\frac{\partial}{\partial t}\Psi = -\frac{\hbar^2}{2m}\Delta\Psi + V\Psi
-$$
+- [[Casualwriter-Blog Repository]](https://github.com/casualwriter/casual-markdown-blog)
+- [[Casualwriter-Blog Preview]](https://casualwriter.github.io/blog/)

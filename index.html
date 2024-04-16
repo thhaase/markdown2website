@@ -65,16 +65,21 @@
             });
 
 
-            // Redirect to specific markdown pages
+            // linking markdown files made easy
             document.body.addEventListener('click', e => {
-                if (e.target.tagName === 'A' && e.target.href.endsWith('.md')) {
-                    e.preventDefault();
-                    const mdFileName = e.target.getAttribute('href');
-                    const pageName = mdFileName.replace('.md', '');
-                    window.location.href = `source/page.html?name=${pageName}`;
+                if (e.target.tagName === 'A' && e.target.href.match(/\.md$/)) {
+                    e.preventDefault(); // Prevent default link behavior
+                    const mdFilePath = e.target.getAttribute('href');
+                    const mdFileName = mdFilePath.split('/').pop(); // Extracts the file name from the path
+                    const pageName = mdFileName.replace('.md', ''); // Removes the .md extension
+                    window.location.href = `source/page.html?name=${pageName}`; // Redirects to the corresponding page
                 }
             });
+
         });
     </script>
+
+
+
 </body>
 </html>

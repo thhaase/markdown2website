@@ -1,12 +1,15 @@
 function parseMarkdown(markdownText) {
 
+    // Parse code before anything else
     const blocks = [];
+
         markdownText = markdownText.replace(/```(\w*)\n([\s\S]*?)```/gim, (match, lang, code) => {
             const highlightedCode = highlightSyntax(escapeHTML(code), lang); 
             blocks.push(`<pre><code>${highlightedCode}</code></pre>`);
             return `@@@CODEBLOCK-${blocks.length - 1}@@@`;
         });
         
+
         // Bulletpoints and Checklist  
         markdownText = parseMarkdownLists(markdownText)
     
@@ -46,8 +49,10 @@ function parseMarkdown(markdownText) {
         // Horizontal lines
         .replace(/---+/g, '<hr style="border: 0; height: 1.2px; background: #000;" />')
 
+        //for codeblocks
         .replace(/@@@CODEBLOCK-(\d+)@@@/g, (match, index) => blocks[index])
         
+
     return htmlText.trim();
 }
 
