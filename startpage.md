@@ -29,6 +29,13 @@ Besides casual things like Headings, **bold text** and *italic text* there are m
 - Tables
 
 
+```markdown
+# markdown
+![Image](jupiter.jpg|25)
+$a^2 + b^2 = c^2$
+```
+
+
 | Header1 | Header2 |
 |---------|---------|
 | Cell1   | Cell2   |

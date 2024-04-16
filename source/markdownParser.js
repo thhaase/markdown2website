@@ -1,14 +1,16 @@
-
 function parseMarkdown(markdownText) {
 
+    const blocks = [];
+        markdownText = markdownText.replace(/```(\w*)\n([\s\S]*?)```/gim, (match, lang, code) => {
+            const highlightedCode = highlightSyntax(escapeHTML(code), lang); 
+            blocks.push(`<pre><code>${highlightedCode}</code></pre>`);
+            return `@@@CODEBLOCK-${blocks.length - 1}@@@`;
+        });
+        
         // Bulletpoints and Checklist  
         markdownText = parseMarkdownLists(markdownText)
     
     const htmlText = markdownText
-
-        // Code
-        .replace(/`([^`]+)`/gim, '<code>$1</code>')
-        .replace(/```([\s\S]*?)```/gim, (match, code) => `<pre><code>${highlightSyntax(code)}</code></pre>`)
         
         // Headings
         .replace(/^### (.*$)/gim, '<h3>$1</h3>')
@@ -44,6 +46,7 @@ function parseMarkdown(markdownText) {
         // Horizontal lines
         .replace(/---+/g, '<hr style="border: 0; height: 1.2px; background: #000;" />')
 
+        .replace(/@@@CODEBLOCK-(\d+)@@@/g, (match, index) => blocks[index])
         
     return htmlText.trim();
 }
@@ -149,3 +152,95 @@ function parseMarkdownLists(markdown) {
     return result.join('\n');
 }
 
+
+//=== Codeblocks
+function escapeHTML(code) {
+    return code.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&#039;');
+}
+
+
+
+//== Syntax highlighting based on language
+function highlightSyntax(code, language) {
+    switch (language.toLowerCase()) {
+        case 'javascript':
+            return highlightJavaScript(code);
+        case 'python':
+            return highlightPython(code);
+        case 'html':
+            return highlightHTML(code);
+        case 'r':
+            return highlightR(code);
+        case 'markdown':
+            return highlightMarkdown(code);
+        case 'latex':
+            return highlightLatex(code);
+        default:
+            return code; // No highlighting if language not supported
+    }
+}
+
+//= JavaScript
+function highlightJavaScript(code) {
+    return code.replace(/"(.*?)"/g, '<span style="color: #ce9178;">"$1"</span>')
+               .replace(/'(.*?)'/g, '<span style="color: #ce9178;">\'$1\'</span>')
+               .replace(/\b(function|var|let|const|if|else|for|while|return)\b/g, '<span style="color: #569cd6;">$1</span>');
+}
+
+//= Python
+function highlightPython(code) {
+    return code.replace(/"(.*?)"/g, '<span style="color: #ce9178;">"$1"</span>')
+               .replace(/'(.*?)'/g, '<span style="color: #ce9178;">\'$1\'</span>')
+               .replace(/\b(def|class|if|else|elif|for|while|return)\b/g, '<span style="color: #569cd6;">$1</span>');
+}
+
+//= HTML
+function highlightHTML(code) {
+    return code.replace(/<([^>]+)>/g, '<span style="color: #d7ba7d;">&lt;$1&gt;</span>');
+}
+
+//= R
+function highlightR(code) {
+    code = code.replace(/"(.*?)"/g, '<span style="color: #ce9178;">"$1"</span>');
+    code = code.replace(/\b(function|if|else|for|while|repeat|in)\b/g, '<span style="color: #569cd6;">$1</span>');
+    code = code.replace(/(\(|\))/g, '<span style="color: #4ec9b0;">$1</span>');
+    code = code.replace(/(\[|\])/g, '<span style="color: #4ec9b0;">$1</span>');
+    code = code.replace(/(<-)/g, '<span style="color: #d16969;">$1</span>');
+    return code;
+}
+
+//= Markdown
+function highlightMarkdown(code) {
+    // Highlight headers
+    code = code.replace(/^# (.*$)/gm, '<span style="color: #569cd6;"># $1</span>'); // H1
+    code = code.replace(/^## (.*$)/gm, '<span style="color: #569cd6;">## $1</span>'); // H2
+    code = code.replace(/^### (.*$)/gm, '<span style="color: #569cd6;">### $1</span>'); // H3
+    code = code.replace(/^#### (.*$)/gm, '<span style="color: #569cd6;">#### $1</span>'); // H4
+    code = code.replace(/^##### (.*$)/gm, '<span style="color: #569cd6;">##### $1</span>'); // H5
+    code = code.replace(/^###### (.*$)/gm, '<span style="color: #569cd6;">###### $1</span>'); // H6
+
+    // Highlight bold and italic
+    code = code.replace(/\*\*(.*?)\*\*/g, '<span style="color: #ce9178;">**$1**</span>'); // Bold
+    code = code.replace(/__(.*?)__/g, '<span style="color: #ce9178;">__$1__</span>'); // Bold
+    code = code.replace(/\*(.*?)\*/g, '<span style="color: #b5cea8;">*$1*</span>'); // Italic
+    code = code.replace(/_(.*?)_/g, '<span style="color: #b5cea8;">_$1_</span>'); // Italic
+
+    // Highlight inline code
+    code = code.replace(/`(.*?)`/g, '<span style="color: #d7ba7d;">`$1`</span>');
+
+    // Highlight images with optional scale
+    code = code.replace(/!\[(.*?)\]\((.*?)\|(\d+)%\)/g, '<span style="color: #9cdcfe;">![$1]($2|$3%)</span>'); // Image with scale
+
+    return code;
+}
+
+
+//= LaTeX
+function highlightLatex(code) {
+    return code.replace(/\\([a-zA-Z]+)/g, '<span style="color: #569cd6;">\\$1</span>')
+               .replace(/(\{.*?\})/g, '<span style="color: #ce9178;">$1</span>');
+}
