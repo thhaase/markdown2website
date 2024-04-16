@@ -18,10 +18,29 @@
     src: url('./second/cmunti.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Fira Code';
+    src: url('./standard/Fira_Code/FiraCode-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fira Code';
+    src: url('./standard/Fira_Code/FiraCode-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+
+
+
+
+
+
 body {
     font-family: 'CMUN-Roman', 'CMUN-Bold', 'CMUN-Italic', 'CMUN-BoldItalic', 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: large;
+    line-height: 1.5;
     background: #fff;
     color: #333;
     margin: 0;
@@ -133,9 +152,9 @@ a:hover {
 
 
 blockquote {
-    border-left: 4px solid #dfe2e5;
+    border-left: 4px solid #777;
     padding: 0 15px;
-    color: #777;
+    color: #666;
 }
 
 /*Bulletpoints*/
@@ -156,24 +175,55 @@ list-style-type: circle; /* hollow circles */
     
 
 /*Codeblocks*/
+/* Code and tt elements no longer have a distinct background or border */
+code, tt {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    font-family: 'Fira Code', monospace;
+}
+/*Block*/
 pre {
-    background-color: #f5f5f5; /* Light grey background */
-    border: 1px solid #ddd; /* Border around the code block */
-    border-radius: 4px; /* Rounded corners for the code block */
-    padding: 1em; /* Padding inside the code block */
-    overflow: auto; /* Adds a scrollbar if the content is too wide */
-    position: relative; /* Positioning context for the copy button */
-  }
-  
-code {
-  font-family: 'Source Code Pro', monospace; /* Monospaced font for code */
+    background-color: #e7e7e7;
+    border: 1px solid #000; /* Adds a colored border to the left for a modern look, similar to blockquote */
+    padding: 1em;
+    overflow: auto; /* Keeps the scrollbar for overflow */
+    font-family: 'Fira Code', monospace;
+    color: #333; /* Text color similar to body for better consistency */
+    line-height: 1.6; /* Matches the line height of your body text */
+    margin: 0.8em 0; /* Spacing above and below the code blocks */
+    font-size: 16px;
+    box-shadow: 0 0 1px #333;
 }
 
 .keyword { color: #795da3; font-weight: bold; }
 .string { color: #df5000; }
 
 
-/* Existing styles... */
+/* Table styling */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 5px;
+    
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+
+
+
+
 
 /* Adjustments for ordered list (ol) to ensure proper numbering */
 ol {
@@ -240,3 +290,36 @@ ol ul ul {
     text-decoration: none;
     background-color: lightgrey;
 }
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff; /* Dark background color */
+    border: 1px solid #000; /* Darker border color */
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px; /* Width of the checkbox */
+    height: 20px; /* Height of the checkbox */
+    position: relative; /* Relative positioning for the checkmark */
+}
+
+/* Custom checkmark */
+input[type="checkbox"]:after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+/* Display the checkmark when checkbox is checked */
+input[type="checkbox"]:checked:after {
+    opacity: 1;
+}
+
