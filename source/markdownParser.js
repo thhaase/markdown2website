@@ -1,46 +1,102 @@
-function parseMarkdown(markdownText) {
-    // Handle expandable text first
-    markdownText = parseExpandableText(markdownText);
-    // Parse Bulletpoints without whitelines between them
-    markdownText = parseBulletPoints(markdownText);
+function parseMarkdownLists(markdown) {
+    const lines = markdown.split('\n');
+    const result = [];
+    const stack = [];
+    let currentIndent = 0;
 
+    lines.forEach(line => {
+        const listMatch = line.match(/^( *)([\*\-\+]) (.*)$/);
+        const checklistMatch = line.match(/^( *)([\*\-\+]) \[([ x])\] (.*)$/); // Match checklist items
+
+        if (checklistMatch) {
+            const indent = checklistMatch[1].length;
+            const checked = checklistMatch[3].trim() === 'x'; // Check if the box should be checked
+            const content = checklistMatch[4];
+            while (stack.length > 0 && indent < stack[stack.length - 1]) {
+                result.push('</ul>');
+                stack.pop();
+            }
+            if (stack.length === 0 || indent > stack[stack.length - 1]) {
+                stack.push(indent);
+                result.push('<ul>');
+            }
+            result.push(`<li><input type="checkbox" ${checked ? 'checked' : ''} disabled>${content}</li>`);
+        } else if (listMatch) {
+            const indent = listMatch[1].length;
+            const content = listMatch[3];
+            while (stack.length > 0 && indent < stack[stack.length - 1]) {
+                result.push('</ul>');
+                stack.pop();
+            }
+            if (stack.length === 0 || indent > stack[stack.length - 1]) {
+                stack.push(indent);
+                result.push('<ul>');
+            }
+            result.push(`<li>${content}</li>`);
+        } else {
+            while (stack.length > 0) {
+                result.push('</ul>');
+                stack.pop();
+            }
+            result.push(line); // Add non-list content
+        }
+    });
+
+    while (stack.length > 0) {
+        result.push('</ul>');
+        stack.pop();
+    }
+
+    return result.join('\n');
+}
+
+
+
+function parseMarkdown(markdownText) {
+
+    markdownText = parseMarkdownLists(markdownText)
+    
     const htmlText = markdownText
+
+        // Code
+        .replace(/`([^`]+)`/gim, '<code>$1</code>')
+        .replace(/```([\s\S]*?)```/gim, (match, code) => `<pre><code>${highlightSyntax(code)}</code></pre>`)
+        
         // Headings
         .replace(/^### (.*$)/gim, '<h3>$1</h3>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+
+        // Blockquotes
+        .replace(/^>(.*)$/gm, '<blockquote>$1</blockquote>')
+
         // Bold and italic
         .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
         .replace(/\*(.*)\*/gim, '<em>$1</em>')
-        // Images, links, line breaks
+
+        // Images, links
         .replace(/!\[(.*?)\]\((.*?)(?:\|(.*?))?\)/gim, (match, alt, src, scale) => {
             scale = scale || 100; // default scale is 100 if not provided
             return `<img alt='${alt}' src='../media/${src}' style='width: ${scale}%;' />`;
         })
         .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
-        .replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>')
-        .replace(/\n$/gim, '<br />')
-        // Horizontal lines
-        .replace(/^---+/gim, '<hr style="border: 0; height: 1.2px; background: #000;" />')
+
+        
+        //expandable text
+        .replace(/!\[(.*?)\]\s*\{(.*?)\}/gs, (match, summaryText, detailsText) => {
+            return `<details><summary>${summaryText}</summary>${detailsText}</details>`;
+        })
+
         // Tables
         .replace(tableRegex, match => parseTable(match))
-        // Blockquotes
-        .replace(/^>(.*)$/gm, '<blockquote>$1</blockquote>')
-        // Task lists
-        .replace(/^- \[(x| )\] (.*)$/gm, (match, checked, text) => {
-            checked = checked === 'x' ? 'checked' : '';
-            return `<input type='checkbox' ${checked} disabled> ${text}`;
-        })
-        // Bullet points
-        .replace(/^( +)?([\*\-\+]) (.*)$/gm, (match, space, bullet, text) => {
-            const indent = space ? space.length / 2 : 0; // Calculate the indentation level based on space length
-            const listType = bullet === '*' ? 'ul' : 'ol';
-            return `<${listType} style="margin-left:${indent}em;"><li>${text}</li></${listType}>`;
-        })
-        // Codeblocks
-        .replace(/```([\s\S]*?)```/gim, function(match, code) {
-            return `<pre><code>${highlightSyntax(code)}</code></pre>`;
-        });
+
+        // Linebreaks
+        .replace(/\n\s*\n/g, '<br><br>')
+
+        // Horizontal lines
+        .replace(/---+/g, '<hr style="border: 0; height: 1.2px; background: #000;" />')
+
+        
     return htmlText.trim();
 }
 
@@ -82,19 +138,19 @@ function highlightSyntax(code) {
     code = code.replace(/\b(function|var|let|const|if|else|for|while|return)\b/g, '<span style="color: #795da3; font-weight: bold;">$1</span>'); // Keywords
     return code;
 }
-  
+
+
 // expandable text
 function parseExpandableText(markdownText) {
     const expandableTextRegex = /!\[(.*?)\]\s*\{(.*?)\}/gs;
     return markdownText.replace(expandableTextRegex, (match, summaryText, detailsText) => {
-      // The summaryText is the clickable title of the collapsible section
-      // The detailsText is the content that will show when the section is expanded
       return `<details><summary>${summaryText}</summary>${detailsText}</details>`;
     });
   }
  
 
-// Parse Bulletpoints without whitelines between them
+/*/ Parse Bulletpoints without whitelines between them
+
  function parseBulletPoints(markdown) {
    const lines = markdown.split('\n');
     let currentIndent = 0;
@@ -123,6 +179,6 @@ function parseExpandableText(markdownText) {
     }
     return markdown;
 }
-
+*/
 
 
