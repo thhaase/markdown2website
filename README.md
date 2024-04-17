@@ -1,92 +1,27 @@
-## Overview
+# Overview
+This project is a lightweight and simple tool that converts markdown files into a minimalist webpages.
 
-This project is a lightweight and simple tool that converts markdown files into a minimalist webpage. It's designed to be easy to use: just place your markdown files in a single folder, and they'll be automatically converted into a clean, readable webpage.
+It's build with a minimalist mindset wich makes it highly flexible and easy to use:
 
-Just copy this folder into a directory with all your markdownfiles, create a `index.md` to make a Homepage and voilà: The Markdownfiles are now a Website. 
+- 1. copy the _source_ folder and _index.html_ in a folder
+- 2. add all markdownfiles
+- 3. make a homepage via creating a _startpage.md_. Use it to link all other markdownfiles
+- 4. for further customization (titles, headerbar,...) edit the _index.html_ and _source/page.html_ file 
 
-For further customization take a look at the html
+✨ voilà ✨ ...that's it!
+To create a public Website upload your folder to Github and activate GithubPages with main/root.
 
-## Features
+## Take a look!
 
-### File Structure
+- [https://thhaase.github.io/markdown2website/](https://thhaase.github.io/markdown2website/)
+---
 
-The project has a simple file structure:
+## Issues
+- Can't link sections from other markdown files, only the files themselves
+- Names of Markdownfiles can't contain special characters like "_"
 
-```
-.
-├── index.md
-├── post1.md
-├── post2.md
-├── .source
-    ├── index.html
-    ├── markdownParser.js
-    ├── post.html
-    ├── second.css
-    └── standard.css
-└── .media
-    └── jupiter.jpg
+## Inspiration and Background
+The Inpiration for this project were the many lightweight RegEx-based parser from the Github User [Casualwriter](https://github.com/casualwriter). The thought of a really simple, selfcontained and minimalistic *Markdown $\Rightarrow$ Website* tool was fascinating. 
 
-```
-
-- `index.md` will be the Homepage, the other markdownfiles (such as post1.md, post2.md) can be linked in the index.md.
-- `.media`: This directory contains media files like images that can be used in the markdown files.
-- `.source`: This directory is where the magic happens. 
-
-### Markdown Features
-
-The markdown parser supports the following features:
-
-- **Headers**: Use `#` for headers. For example:
-
-    ```markdown
-    # Header 1
-    ## Header 2
-    ### Header 3
-    ```
-
-- **Bold Text**: Use `**` or `__` to make text bold. For example:
-
-    ```markdown
-    **Bold Text**
-    __Bold Text__
-    ```
-
-- **Italic Text**: Use `*` or `_` to make text italic. For example:
-
-    ```markdown
-    *Italic Text*
-    _Italic Text_
-    ```
-
-- **Links**: Use `[]()` to create a link. For example:
-
-    ```markdown
-    [Link Text](https://example.com)
-    ```
-
-- **Images**: Use `![]()` to insert an image. For example:
-
-    ```markdown
-    ![Alt Text](.media/jupiter.jpg)
-    ```
-
-- **Blockquotes**: Use `>` to create a blockquote. For example:
-
-    ```markdown
-    > This is a blockquote.
-    ```
-
-- **Task Lists**: Use `- [ ]` for incomplete tasks and `- [x]` for completed tasks. For example:
-
-    ```markdown
-    - [x] Completed task
-    - [ ] Incomplete task
-    ```
-
-
-
-## Motivation
-
-This project was motivated by the work of the GitHub user casual-markdown. The goal was to create a simple and lightweight tool that can convert markdown files into a webpage, without the need for a complex setup or configuration.
-
-The CSS for this project was heavily influenced by certain Typora themes and GitHub's design due to their minimalistic nature.
+- [[Casualwriter-Blog Repository]](https://github.com/casualwriter/casual-markdown-blog)
+- [[Casualwriter-Blog Preview]](https://casualwriter.github.io/blog/)
