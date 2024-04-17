@@ -16,10 +16,6 @@ To create a public Website upload your folder to Github and activate GithubPages
 - [https://thhaase.github.io/markdown2website/](https://thhaase.github.io/markdown2website/)
 ---
 
-## Issues
-- Can't link sections from other markdown files, only the files themselves
-- Names of Markdownfiles can't contain special characters like "_"
-
 ## Inspiration and Background
 The Inpiration for this project were the many lightweight RegEx-based parser from the Github User [Casualwriter](https://github.com/casualwriter). 
 The thought of a really simple, selfcontained and minimalistic *Markdown ==> Website* tool was fascinating.  
