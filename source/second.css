@@ -112,35 +112,147 @@ body {
 }
 
 
+/* This will hide the nav links on small screens and show a hamburger icon instead */
+@media (max-width: 768px) {
+    .header nav {
+      flex-direction: column;
+      align-items: flex-start;
+      display: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .header nav.active {
+      display: flex;
+      max-height: 20em;
+    }
+  
+    .nav-toggle {
+      display: block;
+      cursor: pointer;
+    }
+  
+    .nav-toggle:before {
+      content: "\2630"; /* Unicode character for hamburger icon */
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+  }
+  
+  .nav-button {
+    color: black;
+    background-color: transparent;
+    border: 1px solid transparent;
+    margin-left: 20px;
+    font-size: 1em;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+    text-align: center;
+    line-height: normal;
+    display: inline-block;
+    border-color: black;
+    font-family: 'CMUN-Roman', 'CMUN-Bold', 'CMUN-Italic', 'CMUN-BoldItalic', 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
+}
+
+
+.nav-button:hover {
+    color: black;
+    text-decoration: none;
+    background-color: lightgrey;
+}
+
+
+/* This will hide the nav links on small screens and show a hamburger icon instead */
+@media (max-width: 768px) {
+    .header nav {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        max-height: 0; /* Start with max-height 0 */
+        overflow: hidden; /* Hide the overflowing content */
+        transition: max-height 0.2s; /* Animate max-height for a smooth transition */
+        width: 100%; /* Make nav full width */
+        position:absolute; /* Position it on top of everything else */
+        top: 4.8rem; /* Directly below the header */
+        left: 0px;
+        background-color: #f8f8f8; /* Match the header background color */
+ /*       border-bottom: 3px solid #ddd; /* Add a black line at the bottom */
+    }
+    
+    .header nav.active {
+        max-height: 20em; /* This value should be greater than the total height of all nav items */
+        padding-bottom: 1rem; /* Add padding at the bottom of the menu */
+        border-bottom: 2px solid #ddd;
+        width: 100%;
+    }
+  
+    .nav-toggle {
+        display: block;
+        cursor: pointer;
+        position: relative; /* Position the hamburger icon relative to header */
+        z-index: 1000; /* Ensure the icon is above the expanded menu */
+    }
+  
+    .nav-toggle:before {
+        content: "\2630"; /* Unicode character for hamburger icon */
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+
+    /* Style adjustments for the nav links */
+    .header a {
+        padding: 1em 0em 1em 0em;
+        width: 90%;
+        box-sizing: border-box; /* Include padding and border in width */
+        display: block; /* Make the anchor tags behave like block elements */
+        text-align: center; /* Center the text */
+        border-bottom: 1px solid #e7e7e7; /* Add a border to separate items */
+    }
+    .header a#themeSwitcher {
+        margin-bottom: 1em; /* Adjust as needed for desired space */
+        padding: 0.5em 0 0.5em 0;
+    }
+
+    .nav-button {
+        margin-left: 20px;
+        font-size: 1em;
+        width: 90%;
+        box-sizing: border-box; /* Include padding and border in width */
+        padding: 0.7em 0 0.5em 0;
+    }
+
+}
+  
+
+
+
+
 
 /* Styles for the content */
 #content, #pageContent {
-    border-left: 2px solid #000;
-    border-right: 2px solid #000;
-    border-bottom: 2px solid #000;
-    border-top: 2px solid #000;
+    border: 2px solid #000;
     margin: 0 auto;
-    padding: 20px 40px;
-    max-width: calc(100% - 80px);
+    padding: 20px;
+    max-width: 100%;
 }
 
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 100px) {
     #content, #pageContent {
-        max-width: 1024px;
-    }
-}
-
-@media only screen and (min-width: 1800px) {
-    #content, #pageContent {
-        max-width: 1200px;
+        margin: 0 auto; 
+        width: 95%;
+        box-sizing: border-box; /* Include padding and border in width */
     }
 }
 
 h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, pre, table, hr {
-    margin-left: 20px;
+    margin-left: 10px;
     margin-right: 20px;
-    margin-top: 1.5rem;
-    margin-bottom: -1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.66rem;
 }
 
 a {
@@ -268,30 +380,6 @@ ol ul ul {
 
 }
 
-.nav-button {
-    color: black;
-    background-color: transparent;
-    border: 1px solid transparent;
-    margin-left: 20px;
-    font-size: 1em;
-    padding: 5px 10px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: color 0.3s, border-color 0.3s, background-color 0.3s;
-    text-align: center;
-    line-height: normal;
-    display: inline-block;
-    border-color: black;
-    font-family: 'CMUN-Roman', 'CMUN-Bold', 'CMUN-Italic', 'CMUN-BoldItalic', 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
-}
-
-
-.nav-button:hover {
-    color: black;
-    text-decoration: none;
-    background-color: lightgrey;
-}
 
 input[type="checkbox"] {
     appearance: none;
