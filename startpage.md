@@ -13,12 +13,12 @@ To create a public Website upload your folder to Github and activate GithubPages
 
 ## Linklist
 - **[Features](features.md)**
-- **[detailed "How to use"](how_to_use.md)**
+- **[How to use](howtouse.md)**
 ---
 
 ## Issues
 - Can't link sections from other markdown files, only the files themselves
-
+- Names of Markdownfiles can't contain special characters like "_"
 
 ## Inspiration and Background
 The Inpiration for this project were the many lightweight RegEx-based parser from the Github User [Casualwriter](https://github.com/casualwriter). The thought of a really simple, selfcontained and minimalistic *Markdown $\Rightarrow$ Website* tool was fascinating. 
