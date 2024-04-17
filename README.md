@@ -21,7 +21,9 @@ To create a public Website upload your folder to Github and activate GithubPages
 - Names of Markdownfiles can't contain special characters like "_"
 
 ## Inspiration and Background
-The Inpiration for this project were the many lightweight RegEx-based parser from the Github User [Casualwriter](https://github.com/casualwriter). The thought of a really simple, selfcontained and minimalistic *Markdown $\Rightarrow$ Website* tool was fascinating. 
+The Inpiration for this project were the many lightweight RegEx-based parser from the Github User [Casualwriter](https://github.com/casualwriter). 
+The thought of a really simple, selfcontained and minimalistic *Markdown ==> Website* tool was fascinating.  
+Also this is a nice way to share notes or documents. That's why I included the themeswitch and print button.
 
 - [[Casualwriter-Blog Repository]](https://github.com/casualwriter/casual-markdown-blog)
 - [[Casualwriter-Blog Preview]](https://casualwriter.github.io/blog/)
