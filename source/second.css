@@ -139,6 +139,8 @@ body {
 h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, pre, table, hr {
     margin-left: 20px;
     margin-right: 20px;
+    margin-top: 1.5rem;
+    margin-bottom: -1rem;
 }
 
 a {
