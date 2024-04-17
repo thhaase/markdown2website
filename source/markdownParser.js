@@ -8,17 +8,27 @@ function parseMarkdown(markdownText) {
             blocks.push(`<pre><code>${highlightedCode}</code></pre>`);
             return `@@@CODEBLOCK-${blocks.length - 1}@@@`;
         });
-        
 
-        // Bulletpoints and Checklist  
-        markdownText = parseMarkdownLists(markdownText)
+    // Detect inline math expressions and store them in the inlineMath array
+    const inlineMath = [];
+    markdownText = markdownText.replace(/\$(.+?)\$/g, (match, math) => {
+        inlineMath.push(math);
+        return `@@@INLINEMATH-${inlineMath.length - 1}@@@`;
+    });
+
+    // Bulletpoints and Checklist  
+    markdownText = parseMarkdownLists(markdownText)
     
+
     const htmlText = markdownText
         
         // Headings
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/^###### (.*$)/gim, (match, content) => `<h6 id="${generateId(content)}">${content}</h6>`)
+        .replace(/^##### (.*$)/gim, (match, content) => `<h5 id="${generateId(content)}">${content}</h5>`)
+        .replace(/^#### (.*$)/gim, (match, content) => `<h4 id="${generateId(content)}">${content}</h4>`)
+        .replace(/^### (.*$)/gim, (match, content) => `<h3 id="${generateId(content)}">${content}</h3>`)
+        .replace(/^## (.*$)/gim, (match, content) => `<h2 id="${generateId(content)}">${content}</h2>`)
+        .replace(/^# (.*$)/gim, (match, content) => `<h1 id="${generateId(content)}">${content}</h1>`)
 
         // Blockquotes
         .replace(/^>(.*)$/gm, '<blockquote>$1</blockquote>')
@@ -52,6 +62,11 @@ function parseMarkdown(markdownText) {
 
         // Horizontal lines
         .replace(/---+/g, '<hr style="border: 0; height: 1.2px; background: #000;" />')
+
+        .replace(/@@@INLINEMATH-(\d+)@@@/g, (match, index) => {
+            // The 'katex' class is important here to make sure KaTeX will render this math
+            return `<span class="katex-inline">\$${inlineMath[index]}\$</span>`;
+        })
 
         //for codeblocks
         .replace(/@@@CODEBLOCK-(\d+)@@@/g, (match, index) => blocks[index])
@@ -160,6 +175,20 @@ function parseMarkdownLists(markdown) {
 
     return result.join('\n');
 }
+
+//=== Linking Headings with IDs
+function generateId(text) {
+    return text.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-');
+}
+
+
+
+
+
+
+
+
+
 
 
 //=== Codeblocks

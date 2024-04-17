@@ -184,12 +184,12 @@ code, tt {
 }
 /*Block*/
 pre {
-    background-color: #e7e7e7;
+    background-color: #222;
     border: 1px solid #000; /* Adds a colored border to the left for a modern look, similar to blockquote */
     padding: 1em;
     overflow: auto; /* Keeps the scrollbar for overflow */
     font-family: 'Fira Code', monospace;
-    color: #333; /* Text color similar to body for better consistency */
+    color: #fff; /* Text color similar to body for better consistency */
     line-height: 1.6; /* Matches the line height of your body text */
     margin: 0.8em 0; /* Spacing above and below the code blocks */
     font-size: 16px;

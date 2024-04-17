@@ -11,20 +11,14 @@ It's build with a minimalist mindset wich makes it highly flexible and easy to u
 ✨ voilà ✨ ...that's it!
 To create a public Website upload your folder to Github and activate GithubPages with main/root.
 
-
 ## Linklist
 - **[Features](features.md)**
 - **[detailed "How to use"](how_to_use.md)**
-
 ---
 
-## Why it's good
-- selfcontaining 
-  - includes all necessary components to function independently, no external libraries need to be imported, everything is already downloaded and contained in the _source_ folder
-- minimalistic website design 
-  - abstract to be used for many different projects
-- implementation after the principle "simple is best"
-  - easy to customize
+## Issues
+- Can't link sections from other markdown files, only the files themselves
+
 
 ## Inspiration and Background
 The Inpiration for this project were the many lightweight RegEx-based parser from the Github User [Casualwriter](https://github.com/casualwriter). The thought of a really simple, selfcontained and minimalistic *Markdown $\Rightarrow$ Website* tool was fascinating. 
