@@ -236,14 +236,22 @@ body {
 #content, #pageContent {
     border: 2px solid #000;
     margin: 0 auto;
-    padding: 20px;
-    max-width: 100%;
+    padding: 20px 40px;
+    max-width: calc(100% - 40%);
 }
 
-@media only screen and (min-width: 100px) {
+@media only screen and (max-width: 1200px) {
     #content, #pageContent {
         margin: 0 auto; 
-        width: 95%;
+        max-width: calc(100% - 20%);
+        box-sizing: border-box; /* Include padding and border in width */
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #content, #pageContent {
+        margin: 0 auto; 
+        max-width: calc(100% - 10%);
         box-sizing: border-box; /* Include padding and border in width */
     }
 }
