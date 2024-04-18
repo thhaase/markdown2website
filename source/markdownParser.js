@@ -9,6 +9,14 @@ function parseMarkdown(markdownText) {
             return `@@@CODEBLOCK-${blocks.length - 1}@@@`;
         });
 
+
+    // Detect BLOCK math expressions and store them in the inlineMath array
+    const blockMath = [];
+    markdownText = markdownText.replace(/\$\$(.+?)\$\$/g, (match, math) => {
+        blockMath.push(math);
+        return `@@@BLOCKMATH-${blockMath.length - 1}@@@`;
+    });
+
     // Detect inline math expressions and store them in the inlineMath array
     const inlineMath = [];
     markdownText = markdownText.replace(/\$(.+?)\$/g, (match, math) => {
@@ -62,6 +70,10 @@ function parseMarkdown(markdownText) {
 
         // Horizontal lines
         .replace(/---+/g, '<hr style="border: 0; height: 1.2px; background: #000;" />')
+
+        .replace(/@@@BLOCKMATH-(\d+)@@@/g, (match, index) => {
+                    return `<span class="katex-display">\$${blockMath[index]}\$</span>`;
+                })
 
         .replace(/@@@INLINEMATH-(\d+)@@@/g, (match, index) => {
             // The 'katex' class is important here to make sure KaTeX will render this math
