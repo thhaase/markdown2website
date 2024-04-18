@@ -240,6 +240,14 @@ body {
     max-width: calc(100% - 40%);
 }
 
+@media only screen and (max-width: 1400px) {
+    #content, #pageContent {
+        margin: 0 auto; 
+        max-width: calc(100% - 23%);
+        box-sizing: border-box; /* Include padding and border in width */
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     #content, #pageContent {
         margin: 0 auto; 
@@ -247,7 +255,13 @@ body {
         box-sizing: border-box; /* Include padding and border in width */
     }
 }
-
+@media only screen and (max-width: 1000px) {
+    #content, #pageContent {
+        margin: 0 auto; 
+        max-width: calc(100% - 17%);
+        box-sizing: border-box; /* Include padding and border in width */
+    }
+}
 @media only screen and (max-width: 800px) {
     #content, #pageContent {
         margin: 0 auto; 
@@ -384,6 +398,12 @@ ol ul ul {
     .content {
         width: 100%;
         /*font-size: 12pt; larger text when printing */
+    }
+
+    #content, #pageContent {
+        margin: 0 auto; 
+        max-width: calc(100% - 0%);
+        box-sizing: border-box; /* Include padding and border in width */
     }
 
 }
