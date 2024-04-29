@@ -306,7 +306,8 @@ ul {
   
 /* Style for the nested bullet points */
 ul ul {
-list-style-type: circle; /* hollow circles */
+    list-style-type: circle; /* hollow circles */
+    margin-top: -0.01em;
 }
     
 
