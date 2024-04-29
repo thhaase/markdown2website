@@ -9,6 +9,12 @@ function parseMarkdown(markdownText) {
             return `@@@CODEBLOCK-${blocks.length - 1}@@@`;
         });
 
+    // Extract and replace URLs
+    const urls = [];
+    markdownText = markdownText.replace(/\[(.*?)\]\((.*?)\)/gim, (match, text, link) => {
+        urls.push({text, link});
+        return `@@@URL-${urls.length - 1}@@@`;
+    });
 
     // Detect BLOCK math expressions and store them in the inlineMath array
     const blockMath = [];
@@ -83,7 +89,12 @@ function parseMarkdown(markdownText) {
         //for codeblocks
         .replace(/@@@CODEBLOCK-(\d+)@@@/g, (match, index) => blocks[index])
         
-
+        // URLS
+       .replace(/@@@URL-(\d+)@@@/g, (match, index) => {
+            const { text, link } = urls[index];
+            return `<a href='${link}'>${text}</a>`;
+        });
+    
     return htmlText.trim();
 }
 
