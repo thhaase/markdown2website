@@ -9,13 +9,21 @@ function parseMarkdown(markdownText) {
             return `@@@CODEBLOCK-${blocks.length - 1}@@@`;
         });
 
+    // images
+    const images = [];
+    markdownText = markdownText.replace(/!\[(.*?)\]\((.*?)(?:\|(.*?))?\)/gim, (match, alt, src, scale) => {
+        scale = scale || 100; // default scale is 100 if not provided
+        images.push({ alt, src, scale });
+        return `@@@IMAGE-${images.length - 1}@@@`;
+    });
+    
     // Extract and replace URLs
     const urls = [];
-    markdownText = markdownText.replace(/\[(.*?)\]\((.*?)\)/gim, (match, text, link) => {
+    markdownText = markdownText.replace(/(?<!\!)\[(.*?)\]\((.*?)\)/gim, (match, text, link) => {
         urls.push({text, link});
         return `@@@URL-${urls.length - 1}@@@`;
     });
-
+    
     // Detect BLOCK math expressions and store them in the inlineMath array
     const blockMath = [];
     markdownText = markdownText.replace(/\$\$(.+?)\$\$/g, (match, math) => {
@@ -47,19 +55,18 @@ function parseMarkdown(markdownText) {
         // Blockquotes
         .replace(/^>(.*)$/gm, '<blockquote>$1</blockquote>')
 
+        // Images, links
+        .replace(/!\[(.*?)\]\((.*?)(?:\|(.*?))?\)/gim, (match, alt, src, scale) => {
+            scale = scale || 100; // default scale is 100 if not provided
+            return `<img alt='${alt}' src='../${src}' style='width: ${scale}%;' />`;
+        })
+        //        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
+
         // Bold and italic
         .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
         .replace(/\_\_(.*?)\_\_/gim, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/gim, '<em>$1</em>')
         .replace(/\_(.*?)\_/gim, '<em>$1</em>')
-
-        // Images, links
-        .replace(/!\[(.*?)\]\((.*?)(?:\|(.*?))?\)/gim, (match, alt, src, scale) => {
-            scale = scale || 100; // default scale is 100 if not provided
-            return `<img alt='${alt}' src='../media/${src}' style='width: ${scale}%;' />`;
-        })
-        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
-
         
         //expandable text
         .replace(/!\[(.*?)\]\s*\{(.*?)\}/gs, (match, summaryText, detailsText) => {
@@ -93,8 +100,14 @@ function parseMarkdown(markdownText) {
        .replace(/@@@URL-(\d+)@@@/g, (match, index) => {
             const { text, link } = urls[index];
             return `<a href='${link}'>${text}</a>`;
-        });
+        })
     
+        .replace(/@@@IMAGE-(\d+)@@@/g, (match, index) => {
+            const { alt, src, scale } = images[index];
+            const encodedSrc = encodeURIComponent(src); // Encoding the src to handle special characters
+            return `<img alt='${alt}' src='../${encodedSrc}' style='width: ${scale}%;' />`;
+        });
+
     return htmlText.trim();
 }
 
