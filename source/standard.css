@@ -149,7 +149,7 @@
         transition: max-height 0.2s; /* Animate max-height for a smooth transition */
         width: 100%; /* Make nav full width */
         position:absolute; /* Position it on top of everything else */
-        top: 4.8rem; /* Directly below the header */
+        top: 4.5rem; /* Directly below the header */
         left: 0px;
         background-color: #f8f8f8; /* Match the header background color */
  /*       border-bottom: 3px solid #ddd; /* Add a black line at the bottom */
