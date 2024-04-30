@@ -115,60 +115,6 @@ body {
 /* This will hide the nav links on small screens and show a hamburger icon instead */
 @media (max-width: 768px) {
     .header nav {
-      flex-direction: column;
-      align-items: flex-start;
-      display: none;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    
-    .header nav.active {
-      display: flex;
-      max-height: 20em;
-    }
-  
-    .nav-toggle {
-      display: block;
-      cursor: pointer;
-    }
-  
-    .nav-toggle:before {
-      content: "\2630"; /* Unicode character for hamburger icon */
-      font-size: 2rem;
-      line-height: 2rem;
-    }
-  }
-  
-  .nav-button {
-    color: black;
-    background-color: transparent;
-    border: 1px solid transparent;
-    margin-left: 20px;
-    font-size: 1em;
-    padding: 5px 10px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: color 0.3s, border-color 0.3s, background-color 0.3s;
-    text-align: center;
-    line-height: normal;
-    display: inline-block;
-    border-color: black;
-    font-family: 'CMUN-Roman', 'CMUN-Bold', 'CMUN-Italic', 'CMUN-BoldItalic', 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
-}
-
-
-.nav-button:hover {
-    color: black;
-    text-decoration: none;
-    background-color: lightgrey;
-}
-
-
-/* This will hide the nav links on small screens and show a hamburger icon instead */
-@media (max-width: 768px) {
-    .header nav {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
@@ -177,12 +123,11 @@ body {
         transition: max-height 0.2s; /* Animate max-height for a smooth transition */
         width: 100%; /* Make nav full width */
         position:absolute; /* Position it on top of everything else */
-        top: 4.8rem; /* Directly below the header */
+        top: 4rem; /* Directly below the header */
         left: 0px;
         background-color: #f8f8f8; /* Match the header background color */
  /*       border-bottom: 3px solid #ddd; /* Add a black line at the bottom */
     }
-    
     .header nav.active {
         max-height: 20em; /* This value should be greater than the total height of all nav items */
         padding-bottom: 1rem; /* Add padding at the bottom of the menu */
@@ -225,11 +170,50 @@ body {
         padding: 0.7em 0 0.5em 0;
     }
 
+  .nav-button {
+    color: black;
+    background-color: transparent;
+    border: 1px solid transparent;
+    margin-left: 20px;
+    font-size: 1em;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+    text-align: center;
+    line-height: normal;
+    display: inline-block;
+    border-color: black;
+    font-family: 'CMUN-Roman', 'CMUN-Bold', 'CMUN-Italic', 'CMUN-BoldItalic', 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
+    }
+
+}
+
+
+.nav-button:hover {
+    color: black;
+    text-decoration: none;
+    background-color: lightgrey;
+}
+
+
+/* This will hide the nav links on small screens and show a hamburger icon instead */
+@media (max-width: 768px) {
+    
+    
+    
 }
   
 
-
-
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 0%;
+    z-index: 1; 
+}
 
 
 /* Styles for the content */
@@ -306,8 +290,8 @@ ul {
   
 /* Style for the nested bullet points */
 ul ul {
-    list-style-type: circle; /* hollow circles */
     margin-top: -0.01em;
+    list-style-type: circle; /* hollow circles */
 }
     
 
